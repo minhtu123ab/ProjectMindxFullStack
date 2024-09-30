@@ -19,8 +19,9 @@ import Admin from "./components/admin/Admin";
 import Statistical from "./components/admin/components/Statistical";
 import PushMovie from "./components/admin/components/PushMovie";
 import User from "./components/admin/components/User";
-import PrivateRouteUser from "../privateRouter/PrivateRouterUser";
-import PrivateRouteAdmin from "../privateRouter/PrivateRouterAdmin";
+
+import PrivateRouteAdmin from "./privateRouter/PrivateRouterAdmin";
+import PrivateRouteUser from "./privateRouter/PrivateRouterUser";
 
 export const dataAll = createContext();
 
