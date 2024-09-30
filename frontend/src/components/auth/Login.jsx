@@ -14,16 +14,15 @@ const Login = () => {
   useEffect(() => {
     const getDataUser = async () => {
       try {
-        const response = await URL.get("/"); // Đảm bảo rằng bạn gọi đến endpoint chính xác
-        setRegister(response.data); // Giả sử dữ liệu người dùng nằm trong response.data
+        const response = await URL.get("/");
+        setRegister(response.data);
       } catch (error) {
         console.error("Failed to fetch users", error);
         toast.error("Failed to load user data");
       }
     };
     getDataUser();
-    console.log(register);
-  }, []); // Đảm bảo rằng useEffect này chỉ chạy một lần khi component được mount
+  }, []);
 
   const navigate = useNavigate();
   const [value, setValue] = useState({
@@ -50,8 +49,8 @@ const Login = () => {
   };
 
   const check = (field) => {
-    if (!touched[field]) return true; // Chỉ kiểm tra khi field đã được tương tác
-    if (!value[field]) return false; // Nếu field đã tương tác và giá trị là trống
+    if (!touched[field]) return true;
+    if (!value[field]) return false;
     return true;
   };
 
@@ -75,7 +74,6 @@ const Login = () => {
       ) {
         count++;
         login.push({
-          ...value,
           _id: register[i]._id,
           name: register[i].nameRegister,
           count: register[i].count,

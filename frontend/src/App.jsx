@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import "./App.css";
 import Login from "./components/auth/Login";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
@@ -19,6 +19,8 @@ import Admin from "./components/admin/Admin";
 import Statistical from "./components/admin/components/Statistical";
 import PushMovie from "./components/admin/components/PushMovie";
 import User from "./components/admin/components/User";
+import PrivateRouteUser from "../privateRouter/PrivateRouterUser";
+import PrivateRouteAdmin from "../privateRouter/PrivateRouterAdmin";
 
 export const dataAll = createContext();
 
@@ -104,6 +106,7 @@ const App = () => {
   );
 };
 
+// eslint-disable-next-line react/prop-types
 const RoutesWithNavbar = ({ dataProduct }) => {
   let location = useLocation();
   let hideNavbarPaths = [
@@ -129,12 +132,54 @@ const RoutesWithNavbar = ({ dataProduct }) => {
         <Route path="/seriesmovie" element={<SeriesMovie />} />
         <Route path="/newmovie" element={<NewMovie />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/:id" element={<ProductDetail />} />
-        <Route path="/:id/:movieName" element={<WatchMovie />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/statistical" element={<Statistical />} />
-        <Route path="/pushmovie" element={<PushMovie />} />
-        <Route path="/user" element={<User />} />
+        <Route
+          path="/:id"
+          element={
+            <PrivateRouteUser>
+              <ProductDetail />
+            </PrivateRouteUser>
+          }
+        />
+        <Route
+          path="/:id/:movieName"
+          element={
+            <PrivateRouteUser>
+              <WatchMovie />
+            </PrivateRouteUser>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRouteAdmin>
+              <Admin />
+            </PrivateRouteAdmin>
+          }
+        />
+        <Route
+          path="/statistical"
+          element={
+            <PrivateRouteAdmin>
+              <Statistical />
+            </PrivateRouteAdmin>
+          }
+        />
+        <Route
+          path="/pushmovie"
+          element={
+            <PrivateRouteAdmin>
+              <PushMovie />
+            </PrivateRouteAdmin>
+          }
+        />
+        <Route
+          path="/user"
+          element={
+            <PrivateRouteAdmin>
+              <User />
+            </PrivateRouteAdmin>
+          }
+        />
       </Routes>
       {!hideNavbarPaths2.includes(location.pathname) && <Footer />}
     </dataAll.Provider>
